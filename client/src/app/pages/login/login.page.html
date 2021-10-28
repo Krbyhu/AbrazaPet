@@ -1,0 +1,30 @@
+<!-- <ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Devdactic App</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+ 
+<ion-content>
+  <img src="../../../../assets/img/logo.png" style="align-items: center">
+  <form [formGroup]="loginForm">
+    <div class="input-group1">
+      <ion-item>
+        <ion-input type="email" placeholder="Usuario o correo electrónico" aria-required="true" formControlName="loginName" name ="loginName" clearInput="true" inputmode="email"></ion-input>
+      </ion-item>
+    </div>
+    <div class="input-group2">
+      <ion-item>
+        <ion-input [type]="showPassword ? 'text' : 'password'" placeholder="Contraseña" formControlName="loginPass" name="loginPass" id="pass" aria-required="true"></ion-input>
+        <ion-icon slot="end" name="eye" [color] = "showPassword === true ? 'black' : ''" (click)="togglePassword()" clearOnEdit="false"></ion-icon>
+      </ion-item>
+    </div>
+ 
+    <ion-button mode="ios" type="submit" expand="block" (click)="loginUser()" [disabled]="!loginForm.valid">Iniciar sesión</ion-button>
+    <ion-anchor expand="block" fill="clear" routerLink="/">¿Olvidaste tu contraseña?</ion-anchor>
+    <h2><span> o </span></h2>
+ 
+    <ion-button mode="ios" type="button" expand="block" color="tertiary" routerLink="/register-select">
+      Crear nueva cuenta
+    </ion-button>
+  </form>
+</ion-content>
