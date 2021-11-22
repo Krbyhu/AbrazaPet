@@ -54,6 +54,7 @@ export class LoginPage implements OnInit {
         async res => {
           await loading.dismiss(); 
           this.data = res;
+          localStorage.setItem('usr_name', this.data.usr_name);
           this.router.navigate(['/']);
         },
         async err => {
@@ -68,13 +69,14 @@ export class LoginPage implements OnInit {
       )
 
     } else {
-      this.userUsr_name.usr_name = this.loginForm.controls.loginName.value;;
-      this.userUsr_name.pass = this.loginForm.controls.loginPass.value;;
+      this.userUsr_name.usr_name = this.loginForm.controls.loginName.value;
+      this.userUsr_name.pass = this.loginForm.controls.loginPass.value;
       
       this.authService.logIn(this.userUsr_name).subscribe(
         async res => {
           await loading.dismiss();
           this.data = res;
+          localStorage.setItem('usr_name', this.data.usr_name);
           this.router.navigate(['/']);
         },
         async err => {

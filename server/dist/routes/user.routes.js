@@ -8,10 +8,12 @@ router.route('/')
     .post(user_controllers_1.signin);
 router.route('/register')
     .post(user_controllers_1.signup);
-router.route('/register/:usr_name')
-    .get(verifyToken_1.tokenValidation, user_controllers_1.completeReg)
-    .post(verifyToken_1.tokenValidation, user_controllers_1.completeRegPost);
-// router.route('/profile/:id')
-//     .get(tokenValidation, profile)
-//     .put(tokenValidation, profileUpdate)
+router.route('/register/first')
+    .post(user_controllers_1.signupFirst);
+router.route('/register/second')
+    .post(user_controllers_1.signupSecond);
+router.route('/profile/:usr_name')
+    .get(verifyToken_1.tokenValidation, user_controllers_1.profile)
+    .post(verifyToken_1.tokenValidation, user_controllers_1.profilePost)
+    .put(verifyToken_1.tokenValidation, user_controllers_1.profileUpdate);
 exports.default = router;

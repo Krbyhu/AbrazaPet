@@ -1,0 +1,83 @@
+<ion-header  mode="ios" class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-button mode="ios" (click)="onCancelFunc()">
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+    <ion-title mode="ios">Editar perfil</ion-title>
+    <ion-buttons slot="end" mode="ios">
+      <ion-button mode="ios" (click)="updateProfile()">
+        Hecho
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-avatar>
+    <img [src]="userProfile.profile_image" (click)="presentActionSheet()">
+  </ion-avatar>
+  <div class="container">
+    <a expand="block" fill="clear" (click)="presentActionSheet()">Cambiar foto de perfil</a>
+  </div>
+
+  <ion-grid style="align-items: center;">
+    <ion-row>
+      <ion-col size="3" style="font-size: 13px;" class="vertical">
+        Nombres
+      </ion-col>
+      <ion-col  style="font-size: 13px; padding-left: 0px; margin : 0px;">
+        <ion-input [(ngModel)]="user.names"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3" style="font-size: 13px;" class="vertical">
+        Apellidos
+      </ion-col>
+      <ion-col  style="font-size: 13px; padding-left: 0px; margin : 0px;">
+        <ion-input [(ngModel)]="user.lst_names"></ion-input>
+      </ion-col>
+    </ion-row>
+  
+    <!-- <ion-row>
+      <ion-col size="3" style="font-size: 13px;" class="vertical">
+        Nombre de usuario
+      </ion-col>
+      <ion-col  style="font-size: 13px; padding-left: 0px; margin : 0px;" class="vertical">
+        <ion-input [(ngModel)]="user.usr_name"></ion-input>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row class="ion-no-padding">
+      <ion-col size="3" style="font-size: 13px;" class="vertical">
+        Correo electrónico
+      </ion-col>
+      <ion-col  style="font-size: 13px; padding-left: 0px; margin : 0px;" class="vertical">
+        <ion-input [(ngModel)]="user.mail"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3" style="font-size: 13px;" class="vertical">
+        Teléfono
+      </ion-col>
+      <ion-col size="1.7" style="font-size: 13px;" class="vertical">
+        +56 9
+      </ion-col>
+      <ion-col  style="font-size: 13px; padding-left: 0px; margin : 0px;">
+        <ion-input [(ngModel)]="userProfile.contact_number"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3" style="font-size: 13px;" class="vertical">
+        Dirección
+      </ion-col>
+      <ion-col style="font-size: 13px; padding-left: 0px; margin : 0px;">
+        <ion-input [(ngModel)]="userProfile.addrss"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

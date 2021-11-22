@@ -16,6 +16,22 @@ const routes: Routes = [
   {
     path: 'register-select',
     loadChildren: () => import('./pages/register-select/register-select.module').then( m => m.RegisterSelectPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'profile-update/:usr_name',
+    loadChildren: () => import('./pages/profile-update/profile-update.module').then( m => m.ProfileUpdatePageModule)
+  },
+  {
+    path: 'test',
+    loadChildren: () => import('./pages/test/test.module').then( m => m.TestPageModule)
+  },
+  {
+    path: 'tab4',
+    loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
   }
 ];
 @NgModule({

@@ -12,12 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signin = exports.completeRegPost = exports.completeReg = exports.signup = void 0;
+exports.signin = exports.profileUpdate = exports.profilePost = exports.profile = exports.signupSecond = exports.signupFirst = exports.signup = void 0;
 const database_1 = __importDefault(require("../database"));
 const helpers_1 = require("../lib/helpers");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { rut, names, lst_names, usr_name, mail, pass } = req.body;
+    const { rut, names, lst_names, usr_name, mail, pass, idTipoUsuario } = req.body;
     const newUser = {
         rut,
         names,
@@ -25,21 +25,51 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         usr_name,
         mail,
         pass,
-        idTipoUsuario: 1
+        idTipoUsuario
     };
     newUser.pass = yield (0, helpers_1.encryptPassword)(newUser.pass);
     yield database_1.default.query('INSERT INTO usuario SET ?', [newUser]);
-    const token = jsonwebtoken_1.default.sign({ rut: newUser.rut }, process.env.TOKEN_SECRET || 'TOKENSECRET');
-    res.header('auth-token', token).json(newUser);
+    res.json(newUser);
 });
 exports.signup = signup;
-const completeReg = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { usr_name } = req.params;
-    const user = yield database_1.default.query('SELECT rut, names, lst_names, usr_name, mail FROM usuario WHERE usr_name = ?', [usr_name]);
-    res.json(user);
+const signupFirst = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { rut, mail } = req.body;
+    const userMail = yield database_1.default.query('SELECT * FROM usuario WHERE mail = ?', [mail]);
+    const userRut = yield database_1.default.query('SELECT * FROM usuario WHERE rut = ?', [rut]);
+    if (userMail.length == 1 && userRut.length == 1) {
+        res.status(404).json({ title: 'Correo electrónico y rut en uso', msg: 'El correo electrónico y rut que ingresaste ya están en uso. Intenta ingresando unos nuevos.' });
+    }
+    else if (userRut.length == 1) {
+        res.status(404).json({ title: 'Rut en uso', msg: 'El rut que ingresaste ya están en uso. Intenta ingresando uno nuevo.' });
+    }
+    else if (userMail.length == 1) {
+        res.status(404).json({ title: 'Correo electrónico en uso', msg: 'El correo electrónico que ingresaste ya está en uso. Intenta ingresando uno nuevo.' });
+    }
+    else {
+        res.json(userMail);
+    }
 });
-exports.completeReg = completeReg;
-const completeRegPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.signupFirst = signupFirst;
+const signupSecond = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield database_1.default.query('SELECT * FROM usuario WHERE usr_name = ?', [req.body.usr_name]);
+    if (user.length == 1) {
+        res.status(404).json({ title: 'Nombre de usuario en uso', msg: 'El nombre de usuario que ingresaste ya está en uso. Intenta ingresando uno nuevo.' });
+    }
+    else {
+        res.json(user);
+    }
+});
+exports.signupSecond = signupSecond;
+const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { usr_name } = req.params;
+    const user = yield database_1.default.query('SELECT u.names, u.lst_names, u.usr_name, u.mail, p.addrss, p.contact_number, p.profile_image FROM usuario AS u JOIN perfilusuario AS p ON u.usr_name = p.usr_name WHERE u.usr_name = ?', [usr_name]);
+    if (user.length > 0) {
+        return res.json(user[0]);
+    }
+    res.status(404).json({ message: 'Usuario no existe' });
+});
+exports.profile = profile;
+const profilePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { addrss, contact_number, profile_image } = req.body;
     const userReg = {
         usr_name: req.params.usr_name,
@@ -50,7 +80,14 @@ const completeRegPost = (req, res) => __awaiter(void 0, void 0, void 0, function
     yield database_1.default.query('INSERT INTO perfilusuario SET ?', [userReg]);
     res.json(userReg);
 });
-exports.completeRegPost = completeRegPost;
+exports.profilePost = profilePost;
+const profileUpdate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { usr_name } = req.params;
+    yield database_1.default.query('UPDATE usuario SET ? WHERE usr_name = ?', [req.body[0], usr_name]);
+    yield database_1.default.query('UPDATE perfilusuario SET ? WHERE usr_name = ?', [req.body[1], req.body[0].usr_name]);
+    res.json({ message: 'Usuario modificado' });
+});
+exports.profileUpdate = profileUpdate;
 const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (req.body.mail) {
         const rows = yield database_1.default.query('SELECT * FROM usuario WHERE mail = ?', [req.body.mail]);

@@ -1,17 +1,51 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" mode="ios" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Perfil
-    </ion-title>
+    <ion-title>{{data.usr_name}}</ion-title>
+    <ion-buttons slot="end"  (click)="presentActionSheet()">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" md="ellipsis-horizontal" style="color: black;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-avatar>
+    <img src="{{currentImage}}">
+  </ion-avatar>
+  <ion-text color="dark" mode="ios" class="names">
+    <h6>{{data.names}} {{data.lst_names}}</h6>
+  </ion-text>
+  <ion-button class="profileEdit" expand="block" color="primary" mode="ios" size="small" [routerLink]="['/profile-update', data.usr_name]">
+    <ion-icon name="pencil"></ion-icon> 
+    Editar perfil
+  </ion-button>
+  <ion-grid style="text-align: center;">
+    <ion-col class="ion-no-padding">
+      <ion-label>
+        <h3 style="font-size: 12px; padding-top: 5px;"><ion-icon name="call"></ion-icon> Teléfono</h3>
+        <p style="font-size: 13px;">+56 9 {{data.contact_number}}</p>
+      </ion-label>
+    </ion-col>
+    <ion-col class="ion-no-padding">
+      <ion-label>
+        <h3 style="font-size: 12px; padding-top: 15px;"><ion-icon name="mail"></ion-icon> Correo eléctronico</h3>
+        <p style="font-size: 13px;">{{data.mail}}</p>
+      </ion-label>
+    </ion-col>
+    <ion-col class="ion-no-padding">
+      <ion-label>
+        <h3 style="font-size: 12px; padding-top: 15px;"><ion-icon name="navigate-circle"></ion-icon> Dirección</h3>
+        <p style="font-size: 13px; padding-bottom: 5px;">{{data.addrss}}</p>
+      </ion-label>
+    </ion-col>
+  </ion-grid>
+  <ion-button class="profileEdit" expand="block" color="tertiary" mode="ios" size="small">
+    Mis publicaciones
+  </ion-button>
+  <ion-button class="profileEdit" style="padding-top: 2px;" expand="block" color="tertiary" mode="ios" size="small">
+    Mis mascotas
+  </ion-button>
 
-  <app-explore-container name="Perfil"></app-explore-container>
+  <!-- <app-explore-container name="Perfil"></app-explore-container> -->
 </ion-content>

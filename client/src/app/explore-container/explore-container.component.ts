@@ -14,7 +14,8 @@ export class ExploreContainerComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router, private nav: NavController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   logOut(){
     this.authService.logOut();

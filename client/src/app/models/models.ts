@@ -7,3 +7,10 @@ export interface IUser {
     pass?: string;
     idTipoUsuario?: number;
 }
+
+export interface IUserProfile {
+    usr_name?: string;
+    addrss?: string;
+    contact_number?: number;
+    profile_image?: string;
+}

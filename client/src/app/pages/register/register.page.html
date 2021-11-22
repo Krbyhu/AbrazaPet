@@ -1,0 +1,98 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="" mode="ios"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides class="swiper-no-swiping">
+    <ion-slide>
+      <ion-slide>
+        <ion-text color="black">
+          <h6>¿Cómo te llamas?</h6>
+          <form [formGroup]="namesForm">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <!-- <div class="input-group1"> -->
+                    <ion-item>
+                      <ion-input type="text" placeholder="Nombre" aria-required="true" inputmode="text" formControlName="names" name ="names"></ion-input>
+                    </ion-item>
+                  <!-- </div> -->
+                </ion-col>
+                <ion-col>
+                  <!-- <div class="input-group2"> -->
+                    <ion-item>
+                      <ion-input type="text" placeholder="Apellido" aria-required="true"  inputmode="text" formControlName="lst_names" name ="lst_names"></ion-input>
+                    </ion-item>
+                  <!-- </div> -->
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-button (click)="nextFirst()" type="submit" mode="ios" expand="block" [disabled]="!namesForm.valid">Siguiente</ion-button>
+          </form>
+          <h2><span></span></h2>
+          <ion-anchor expand="block" fill="clear" routerLink="/">¿Ya tienes cuenta?</ion-anchor>
+        </ion-text>
+      </ion-slide>
+    </ion-slide>
+    <ion-slide>
+      <ion-text color="black">
+        <h6>¿Cuál es tu correo y rut?</h6>
+        <form [formGroup]="mailForm">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <!-- <div class="input-group1"> -->
+                  <ion-item>
+                    <ion-input type="email" placeholder="Correo" aria-required="true" inputmode="email" formControlName="mail" name ="mail"></ion-input>
+                  </ion-item>
+                <!-- </div> -->
+              </ion-col>
+              <ion-col>
+                <!-- <div class="input-group2"> -->
+                  <ion-item>
+                    <ion-input type="number" placeholder="Rut" aria-required="true"  inputmode="number" formControlName="rut" name ="rut" max="9"></ion-input>
+                  </ion-item>
+                <!-- </div> -->
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-button (click)="nextSecond()" type="submit" mode="ios" expand="block" [disabled]="!mailForm.valid">Siguiente</ion-button>
+        </form>
+        <h2><span></span></h2>
+        <ion-anchor expand="block" fill="clear" routerLink="/">¿Ya tienes cuenta?</ion-anchor>
+      </ion-text>
+    </ion-slide>
+    <ion-slide>
+      <ion-text color="black">
+        <h6>Elige un nombre de usuario y contraseña</h6>
+        <form [formGroup]="userForm">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <!-- <div class="input-group1"> -->
+                  <ion-item>
+                    <ion-input type="text" placeholder="Usuario" aria-required="true" inputmode="text" formControlName="usr_name" name ="usr_name"></ion-input>
+                  </ion-item>
+                <!-- </div> -->
+              </ion-col>
+              <ion-col>
+                <!-- <div class="input-group2"> -->
+                  <ion-item>
+                    <ion-input type="password" placeholder="Contraseña" aria-required="true"  inputmode="password" formControlName="pass" name ="pass"></ion-input>
+                  </ion-item>
+                <!-- </div> -->
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-button (click)="nextFinal()" type="submit" mode="ios" expand="block" [disabled]="!userForm.valid">Crear cuenta</ion-button>
+        </form>
+        <h2><span></span></h2>
+        <ion-anchor expand="block" fill="clear" routerLink="/">¿Ya tienes cuenta?</ion-anchor>
+      </ion-text>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
