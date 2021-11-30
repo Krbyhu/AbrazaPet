@@ -16,4 +16,6 @@ router.route('/profile/:usr_name')
     .get(verifyToken_1.tokenValidation, user_controllers_1.profile)
     .post(verifyToken_1.tokenValidation, user_controllers_1.profilePost)
     .put(verifyToken_1.tokenValidation, user_controllers_1.profileUpdate);
+router.route('/complete-profile')
+    .post(verifyToken_1.tokenValidation, user_controllers_1.completeProfile);
 exports.default = router;

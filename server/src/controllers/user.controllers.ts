@@ -18,7 +18,8 @@ export const signup = async (req: Request, res: Response) => {
     }
     newUser.pass = await encryptPassword(newUser.pass);
     await db.query('INSERT INTO usuario SET ?', [newUser]);
-    res.json(newUser);
+    const token = jwt.sign({ rut: newUser.rut }, process.env.TOKEN_SECRET || 'TOKENSECRET');
+    res.header('auth-token', token).json(newUser);
 };
 
 export const signupFirst = async (req: Request, res: Response) => {
@@ -103,4 +104,16 @@ export const signin = async (req: Request, res: Response) => {
         const token = jwt.sign({ rut: user.rut }, process.env.TOKEN_SECRET || 'TOKENSECRET');
         res.header('auth-token', token).json(user);
     }
+};
+
+export const completeProfile = async (req: Request, res: Response) => {
+    const { usr_name, addrss, contact_number, profile_image} = req.body;
+    const userReg = {
+        usr_name,
+        addrss,
+        contact_number,
+        profile_image
+    }
+    await db.query('INSERT INTO perfilusuario SET ?', [userReg]);
+    res.json(userReg);
 };

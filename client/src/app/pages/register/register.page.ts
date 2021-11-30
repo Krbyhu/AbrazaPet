@@ -37,21 +37,21 @@ export class RegisterPage implements OnInit {
     names: ["", Validators.required],
     lst_names: ["", Validators.required]
 
-});
+  });
 
-public mailForm = this.fb.group({
+  public mailForm = this.fb.group({
 
-  mail: ["", Validators.required],
-  rut: ["", Validators.required]
+    mail: ["", Validators.required],
+    rut: ["", Validators.required]
 
-});
+  });
 
-public userForm = this.fb.group({
+  public userForm = this.fb.group({
 
-  usr_name: ["", Validators.required],
-  pass: ["", Validators.required]
+    usr_name: ["", Validators.required],
+    pass: ["", Validators.required]
 
-});
+  });
 
   ngOnInit() {
   }
@@ -138,7 +138,8 @@ public userForm = this.fb.group({
     this.authService.signUp(this.user).subscribe(
       res => {
         this.data = res;
-        this.router.navigate(['/login']);
+        localStorage.setItem('usr_name', this.userForm.controls.usr_name.value);
+        this.router.navigate(['/complete-profile']);
       },
       err => console.log(err)
     )

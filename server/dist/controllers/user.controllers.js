@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signin = exports.profileUpdate = exports.profilePost = exports.profile = exports.signupSecond = exports.signupFirst = exports.signup = void 0;
+exports.completeProfile = exports.signin = exports.profileUpdate = exports.profilePost = exports.profile = exports.signupSecond = exports.signupFirst = exports.signup = void 0;
 const database_1 = __importDefault(require("../database"));
 const helpers_1 = require("../lib/helpers");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -29,7 +29,8 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     };
     newUser.pass = yield (0, helpers_1.encryptPassword)(newUser.pass);
     yield database_1.default.query('INSERT INTO usuario SET ?', [newUser]);
-    res.json(newUser);
+    const token = jsonwebtoken_1.default.sign({ rut: newUser.rut }, process.env.TOKEN_SECRET || 'TOKENSECRET');
+    res.header('auth-token', token).json(newUser);
 });
 exports.signup = signup;
 const signupFirst = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -121,3 +122,15 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.signin = signin;
+const completeProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { usr_name, addrss, contact_number, profile_image } = req.body;
+    const userReg = {
+        usr_name,
+        addrss,
+        contact_number,
+        profile_image
+    };
+    yield database_1.default.query('INSERT INTO perfilusuario SET ?', [userReg]);
+    res.json(userReg);
+});
+exports.completeProfile = completeProfile;

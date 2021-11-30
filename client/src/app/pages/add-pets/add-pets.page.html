@@ -1,0 +1,82 @@
+<ion-header translucent class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Agregar mascota</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-avatar>
+    <img [src]="pet.pet_image" (click)="presentActionSheet()">
+  </ion-avatar>
+  <div class="container">
+    <a expand="block" fill="clear" (click)="presentActionSheet()">Elegir foto de mascota</a>
+  </div>
+    <form [formGroup]="petForm">
+    <br>
+    <ion-grid style="margin-top: -20px;">
+      <ion-row>
+        <ion-col>
+          <!-- <div class="input-group1"> -->
+            <ion-item class="inputItem">
+              <ion-input type="text" placeholder="Nombre de mascota" aria-required="true" inputmode="text" name="pet_name" formControlName="pet_name"></ion-input>
+            </ion-item>
+          <!-- </div> -->
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item mode="ios">
+            <ion-label style="font-size: 0.7em;">Tipo de mascota</ion-label>
+              <ion-select okText="Listo" cancelText="Volver" style="font-size: 0.7em;" mode="md" [(ngModel)]="pet.idTipoMascota" (change)="onChange(pet.idTipoMascota)" formControlName="idTipoMascota">
+                <ion-select-option value="1">Perro</ion-select-option>
+                <ion-select-option value="2">Gato</ion-select-option>
+              </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item mode="ios">
+            <ion-label style="font-size: 0.7em;">Sexo de mascota</ion-label>
+              <ion-select okText="Listo" cancelText="Volver" style="font-size: 0.7em;" mode="md" [(ngModel)]="pet.idPetGender" (change)="onChange(pet.idPetGender)" formControlName="idPetGender">
+                <ion-select-option value="1">Macho</ion-select-option>
+                <ion-select-option value="2">Hembra</ion-select-option>
+              </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item mode="ios">
+            <ion-label style="font-size: 0.7em;">Chip</ion-label>
+              <ion-select okText="Listo" cancelText="Volver" style="font-size: 0.7em;" mode="md" [(ngModel)]="pet.chip" (change)="onChange(pet.chip)" formControlName="chip">
+                <ion-select-option value="Si">Si</ion-select-option>
+                <ion-select-option value="No">No</ion-select-option>
+              </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item class="inputItem">
+            <ion-input type="text" placeholder="Describe a tu mascota (máximo 255 caracteres)" aria-required="true" inputmode="text" name="pet_name" formControlName="descripcion"></ion-input>
+          </ion-item>
+          <!-- <ion-item mode="ios" class="inputItem" style="margin-top: 10px; text-align: center;">
+            <ion-textarea placeholder="Describe a tu mascota (máximo 255 caracteres)" formControlName="descripcion"></ion-textarea>
+          </ion-item> -->
+        </ion-col>
+      </ion-row>
+      <ion-row style="text-align:center">
+        <ion-col>
+          <ion-button color="primary" mode="ios" size="small" [disabled]="!petForm.valid" (click)="addPet()">
+            <ion-icon name="add-circle" slot="start"></ion-icon>Agregar mascota
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>

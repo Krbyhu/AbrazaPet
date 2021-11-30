@@ -79,8 +79,4 @@ export class Tab3Page implements OnInit {
       )
     }
   }
-
-  prueba() {
-    this.router.navigate(['/test']);
-  }
 }

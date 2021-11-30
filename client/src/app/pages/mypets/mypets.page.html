@@ -1,0 +1,50 @@
+<ion-header translucent class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mis Mascotas</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- con mascotas -->
+<ion-content fullscreen class="ion-padding" *ngIf="data != ''">
+  <ion-card *ngFor="let pet of data">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col style="text-align: center;" size="5">
+            <img src="{{pet.pet_image}}">
+            <ion-button color="primary" size="small" mode="ios" style="font-size: 9px;">Editar</ion-button>
+          </ion-col>
+          <ion-col style="text-align: center;">
+            <p style="color: black;">{{pet.pet_name}}</p>
+            <p style="color: grey; font-size: 11px; margin-top: -10px;">{{pet.tipomascota}}</p>
+            <ion-button color="primary" size="small" mode="ios" style="font-size: 9px; margin-top: -8px;">Notificar perdido</ion-button>
+            <br>
+            <p style="color: black; font-size: 11px; text-align: left; margin-top: 15px;">Sexo: {{pet.sexo}}</p>
+            <p style="color: black; font-size: 11px; text-align: left;">Chip: {{pet.chip}}</p>
+            <p style="color: black; font-size: 11px; text-align: left;">Descripción: {{pet.descripcion}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <div style="text-align: center;">
+    <ion-button color="primary" mode="ios" size="small" routerLink="/add-pets">
+      <ion-icon name="add-circle" slot="start"></ion-icon>Agregar mascota
+    </ion-button>
+  </div>
+
+  <!-- sin mascotas -->
+<ion-content fullscreen *ngIf="data == ''">
+  <ion-card mode="ios" class="noPetCard">
+    <ion-card-header>
+      <ion-icon name="paw-outline" class="noPetIcon"></ion-icon>
+      <ion-card-title style="font-size: 15px;">Aún no has agregado mascotas</ion-card-title>
+    </ion-card-header>
+    <ion-button color="primary" mode="ios" size="small" routerLink="/add-pets">
+      <ion-icon name="add-circle" slot="start"></ion-icon>Agregar mascota
+    </ion-button>
+  </ion-card>
+</ion-content>
+</ion-content>

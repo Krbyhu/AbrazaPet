@@ -1,0 +1,41 @@
+<ion-header  mode="ios" class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-title mode="ios">Completar perfil</ion-title>
+    <!-- <ion-buttons slot="end" mode="ios">
+      <ion-button mode="ios" >
+        Hecho
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-avatar>
+    <img [src]="userProfile.profile_image" (click)="presentActionSheet()">
+  </ion-avatar>
+  <div class="container">
+    <a expand="block" fill="clear" (click)="presentActionSheet()">Seleccionar foto de perfil</a>
+  </div>
+  <form [formGroup]="profileForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <!-- <div class="input-group1"> -->
+            <ion-item>
+              <ion-input type="text" placeholder="Dirección" aria-required="true" inputmode="text" name ="addrss" formControlName="addrss"></ion-input>
+            </ion-item>
+          <!-- </div> -->
+        </ion-col>
+        <ion-col>
+          <!-- <div class="input-group2"> -->
+            <ion-item>
+              <ion-label>+56 9</ion-label>
+              <ion-input type="number" placeholder="Teléfono" aria-required="true"  inputmode="text" name ="contact_number" formControlName="contact_number"></ion-input>
+            </ion-item>
+          <!-- </div> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button type="submit" mode="ios" expand="block" [disabled]="!profileForm.valid" (click)="completeProfile()">Finalizar</ion-button>
+  </form>
+</ion-content>

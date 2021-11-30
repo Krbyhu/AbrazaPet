@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { profile, profilePost, profileUpdate, signin, signup, signupFirst, signupSecond } from '../controllers/user.controllers';
+import { profile, profilePost, profileUpdate, signin, signup, signupFirst, signupSecond, completeProfile } from '../controllers/user.controllers';
 import { tokenValidation } from '../lib/verifyToken';
 
 
@@ -17,6 +17,8 @@ router.route('/profile/:usr_name')
     .get(tokenValidation, profile)
     .post(tokenValidation, profilePost)
     .put(tokenValidation, profileUpdate);
+router.route('/complete-profile')
+    .post(tokenValidation, completeProfile);
 
 
 export default router;

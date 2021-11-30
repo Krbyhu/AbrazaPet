@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="" mode="ios"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">Mensajes</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- No hay chats -->
+<ion-content fullscreen *ngIf="data == ''">
+  <ion-card mode="ios" class="noPetCard">
+    <ion-card-header>
+      <ion-icon name="chatbox-ellipses-outline" class="noPetIcon"></ion-icon>
+      <ion-card-title style="font-size: 15px;">Aún no has iniciado ninguna conversación</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</ion-content>
+
+
+
+<!-- Hay chats -->
+<ion-content fullscreen *ngIf="data != ''">
+  <ion-list mode="ios">
+    <ion-item *ngFor="let chat of chats" [routerLink]="['/chat-room/' + chat.idConversacion + '-' + usr_name]" detail="false">
+      <ion-avatar slot="start">
+        <img src="{{chat.profile_image}}">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{chat.usr_name}}</h2>
+        <!-- <h3>I'm a big deal</h3> -->
+        <p>Texto de prueba (debería aparecer ultimo mensaje)</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

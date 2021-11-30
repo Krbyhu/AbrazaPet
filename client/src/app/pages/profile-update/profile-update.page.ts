@@ -5,7 +5,6 @@ import { IUser, IUserProfile } from 'src/app/models/models';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 import { AuthService } from '../../services/user/auth.service';
-import { Filesystem } from '@capacitor/filesystem';
 
 @Component({
   selector: 'app-profile-update',

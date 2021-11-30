@@ -4,7 +4,8 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import userRoutes from './routes/user.routes';
-// import forumRoutes from './routes/forum.routes';
+import petRoutes from './routes/pet.routes';
+import chatRoutes from './routes/chats.routes';
 
 //Inicialization
 const app: Application = express();
@@ -24,7 +25,8 @@ app.use(cors({
 
 // //Routes
 app.use('/api/auth', userRoutes);
-// app.use('/api/forum', forumRoutes);
+app.use('/api/pets', petRoutes);
+app.use('/api/chats', chatRoutes);
 
 
 //Starting the server

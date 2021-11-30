@@ -47,6 +47,7 @@ export class AuthService {
   signUp(user: model.IUser){
     return this.http.post(`${this.API_URI}/auth/register`, user, {observe : 'response'}).pipe(
       map(res => {
+        localStorage.setItem('auth-token', res.headers.get('auth-token'));
         return res.body;
         }
       )
@@ -59,6 +60,15 @@ export class AuthService {
 
   updateProfile(usr_name: string|number, updatedUser: model.IUser, updatedProfile: model.IUserProfile): Observable<model.IUser> {
     return this.http.put(`${this.API_URI}/auth/profile/${usr_name}`, [updatedUser, updatedProfile]);
+  }
+
+  completeProfile(user: model.IUserProfile){
+    return this.http.post(`${this.API_URI}/auth/complete-profile`, user, {observe : 'response'}).pipe(
+      map(res => {
+        return res.body;
+        }
+      )
+    )
   }
 
   logOut(){
